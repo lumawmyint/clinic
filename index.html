@@ -1,551 +1,840 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="my">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <title>Ameriprise India LLP - Tax Invoice</title>
+    <title>အေးချမ်းမွန် အထွေထွေရောဂါကု ဆေးခန်း</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            color: #333;
-        }
-        
-        .container {
-            margin: 20px auto;
-            padding: 30px;
-            background: white;
-            box-shadow: 
-                0 1px 3px rgba(0, 0, 0, 0.12),
-                0 1px 10px rgba(0, 0, 0, 0.08),
-                0 10px 20px rgba(0, 0, 0, 0.05);
-            border-radius: 8px;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-            position: relative;
-            transition: all 0.3s ease;
-            max-width: 850px;
-        }
-              
-        .header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            position: relative;
-        }
-        .company-info {
-            flex: 1;
-        }
-        .company-name {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .logo {
-            width: 180px;
-            height: auto;
-            position: absolute;
-            right: 0;
-            top: 0;
-        }
-        .divider {
-            border-top: 2px solid #000;
-            margin: 15px 0;
-        }
-        .invoice-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        .gst-info {
-            flex: 1;
-            text-align: left;
-            font-weight: bold;
-        }
-        .invoice-title {
-            flex: 1;
-            text-align: center;
-            font-weight: bold;
-            font-size: 18px;
-        }
-        .invoice-recipient {
-            flex: 1;
-            text-align: right;
-            font-weight: bold;
-        }
-        .details-container {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-        }
-        .left-details,  {
-            width: 48%;
+        :root {
+            --primary: #1a73e8;
+            --secondary: #34a853;
+            --accent: #fbbc05;
+            --light: #f8f9fa;
+            --dark: #202124;
+            --text: #3c4043;
+            --white: #ffffff;
         }
 
-        .right-details,  {
-            width: 60%;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Padauk', sans-serif;
         }
-        .section-title {
-            font-weight: bold;
-            margin-bottom: 8px;
+
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
-        .detail-row {
+
+        /* Header/Navigation */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
             display: flex;
-            margin-bottom: 6px;
+            justify-content: space-between;
             align-items: center;
-            min-height: 24px;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
         }
-        .detail-label {
-            width: 120px;
-            font-weight: 600;
-            margin-right: 8px;
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .detail-value {
+
+        .logo img {
+            height: 50px;
+        }
+
+        .logo-text h1 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo-text p {
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 700;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* Mobile Menu Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                padding: 2rem;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1700832082152-0416a3ee5e60?q=80&w=1473&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 80px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            border: 2px solid var(--primary);
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--white);
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--white);
+            color: var(--primary);
+        }
+
+        .contact-text[onclick] {
+            cursor: pointer;
+        }
+
+        .contact-text[onclick]:hover {
+            color: var(--primary);
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .about-img {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: slideInLeft 1s ease-in-out;
+        }
+
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .about-img:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-content {
+            flex: 1;
+            animation: slideInRight 1s ease-in-out;
+        }
+
+        .section-title {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: var(--accent);
+            bottom: -10px;
+            left: 0;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 5%;
+            background-color: var(--white);
+        }
+
+        .services-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .service-card:hover .service-img img {
+            transform: scale(1.1);
+        }
+
+        .service-content {
+            padding: 1.5rem;
+        }
+
+        .service-content h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Doctor Section */
+        .doctor {
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .doctor-profile {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            text-align: left;
+        }
+
+        .doctor-img {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .doctor-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .doctor-info {
             flex: 1;
         }
-        .amount-section {
-            margin-top: 20px;
+
+        .doctor-info h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
         }
-        .form-section {
-            margin-top: 30px;
-            padding: 20px;
+
+        .doctor-info p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .qualification {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 0.5rem;
+        }
+
+        .qualification i {
+            color: var(--accent);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 5%;
+            background-color: var(--light);
+        }
+
+        .contact-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-info h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-details {
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item i {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .contact-text h4 {
+            color: var(--dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-form {
+            flex: 1;
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
             border: 1px solid #ddd;
             border-radius: 5px;
-            background-color: #f9f9f9;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input, select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        .highlight {
-            font-weight: bold;
-            color: #d30707; /* Changed to pure red */
-        }
-        .highlight-percentage {
-            color: #d30707; /* Pure red for percentages */
-            font-weight: bold;
-        }
-        .certification {
-            text-align: center;
-            margin: 20px 0;
-        }
-        .footer {
-            text-align: center;
-            font-style: italic;
-        }
-        .percentage-input {
-            width: 60px;
-            display: inline-block;
-            margin-left: 5px;
-        }
-        #blue {
-            color: #065096; /* Light blue color */
-            /* You can add other blue-related styles */
+            font-size: 1rem;
         }
 
-        .toBold {
-            font-weight: bold;
-        }
-        .amount-value {
-            color: #d30707; /* Pure red for amount values */
-            font-weight: bold;
+        .form-group textarea {
+            height: 150px;
         }
 
-        /* For better screenshot capture */
-        @media print, (prefers-color-scheme: dark) {
-            .container {
-                box-shadow: none;
-                border: 1px solid #ddd;
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .footer-col h3 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-col p {
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+
+            .about,
+            .doctor-profile,
+            .contact-container {
+                flex-direction: column;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: 70vh;
+                margin-top: 60px;
+            }
+
+            .btn {
+                padding: 0.6rem 1.5rem;
+            }
+
+            .hero-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn-outline {
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
             }
         }
     </style>
 </head>
+
 <body>
-    <button class="screenshot-button" onclick="captureMain()">📸 Capture SS </button>
-    <div id="notification" style="display: none; position: fixed; top: 20px; right: 20px; background: #3f47b4; color: white; padding: 15px; border-radius: 5px; z-index: 1000;">
-        Image copied to clipboard!
-    </div>
-
-<div class="container"> 
-    <div class="header">
-        <div class="company-info">
-            <div class="company-name" id="blue">AMERIPRISE INDIA LLP</div>
-            <div id="blue">Organization that emphasizes learning and growth</div>
-            <div id="blue">Build your career at Ameriprise India</div>
-            <div>Plot 14, Sector 18, Udyog Vihar</div>
-            <div>Gurugram, Haryana - 122015</div>
-            <div class="toBold">LEI code - 335800553LP4PNPF6240</div>
-        </div>
-        <img src="taxlogo.jpg" alt="Company Logo" class="logo">
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="invoice-header">
-        <div class="gst-info">GSTIN - 06ABOFA7542E12F</div>
-        <div class="invoice-title">TAX INVOICE</div>
-        <div class="invoice-recipient">Original For recipient</div>
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="details-container">
-        <div class="left-details">
-            <div class="section-title"  id="blue">Customer Details</div>
-            <div class="detail-row">
-                <span class="detail-label">Name:</span>
-                <span id="display-customer-name" class="detail-value">Mr. Subham Sen</span>
+    <!-- Header/Navigation -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="https://www.creativefabrica.com/wp-content/uploads/2019/05/Medical-healthy-clinic-logo-concept-by-DEEMKA-STUDIO-1-580x406.jpg" alt="Clinic Logo">
+                <div class="logo-text">
+                    <h1>အေးချမ်းမွန်</h1>
+                    <p>အထွေထွေရောဂါကု ဆေးခန်း</p>
+                </div>
             </div>
-            <div class="detail-row">
-                <span class="detail-label">Acc Number:</span>
-                <span id="display-acc-number" class="detail-value">6645661545</span>
+            <div class="nav-links" id="navLinks">
+                <a href="#home">ပင်မ</a>
+                <a href="#about">ကျွန်ုပ်တို့အကြောင်း</a>
+                <a href="#services">ဝန်ဆောင်မှုများ</a>
+                <a href="#doctor">ဆရာဝန်</a>
+                <a href="#contact">ဆက်သွယ်ရန်</a>
             </div>
-            <div class="detail-row">
-                <span class="detail-label">IFSC Code:</span>
-                <span id="display-ifsc" class="detail-value">KKBK0006577</span>
+            <div class="mobile-menu" id="mobileMenu">
+                <i class="fas fa-bars"></i>
             </div>
-            <div class="detail-row">
-                <span class="detail-label">Bank Name:</span>
-                <span id="display-bank" class="detail-value">Kotak Mahindra Bank</span>
-            </div>
-            <div class="detail-row">
-                <span class="detail-label">Email Address:</span>
-                <span id="display-email" class="detail-value">2008.subham@gmail.com</span>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>သင့်ကျန်းမာရေး ကျွန်ုပ်တို့၏ ဦးစားပေး</h2>
+            <p>အရည်အသွေးမြင့် ကျန်းမာရေးစောင့်ရှောက်မှုဝန်ဆောင်မှုများ</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn">ချိန်းဆိုရန်</a>
+                <a href="#services" class="btn btn-outline">ဝန်ဆောင်မှုများ</a>
             </div>
         </div>
-        <div class="right-details">
-            <div class="detail-row">
-                <span class="detail-label">Invoice Date:</span>
-                <span id="invoice-date" class="detail-value"></span>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-img">
+            <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                alt="Clinic Interior">
+        </div>
+        <div class="about-content">
+            <h2 class="section-title">ကျွန်ုပ်တို့အကြောင်း</h2>
+            <p>အေးချမ်းမွန် အထွေထွေရောဂါကု ဆေးခန်းသည် မန္တလေးမြို့တွင် ၁၀ နှစ်ကျော် အတွေ့အကြုံရှိသော ကျွမ်းကျင်သည့်
+                ဆရာဝန်ကြီးများဖြင့် ဖွင့်လှစ်ထားသော ဆေးခန်းဖြစ်ပါသည်။</p>
+            <p>ကျွန်ုပ်တို့၏ ရည်မှန်းချက်မှာ လူနာများအား အရည်အသွေးမြင့် ကျန်းမာရေးစောင့်ရှောက်မှုများ ပေးနိုင်ရန်နှင့်
+                လူနာအားလုံး သက်တောင့်သက်သာရှိစွာ ကုသမှုခံယူနိုင်ရန် ဖြစ်ပါသည်။</p>
+            <a href="#contact" class="btn">ဆက်သွယ်ရန်</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="services-container">
+            <h2 class="section-title" style="text-align: center;">ကျွန်ုပ်တို့၏ ဝန်ဆောင်မှုများ</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                            alt="General Consultation">
+                    </div>
+                    <div class="service-content">
+                        <h3>အထွေထွေရောဂါကုသမှု</h3>
+                        <p>ဖျားနာခြင်း၊ နာမကျန်းဖြစ်ခြင်း၊ နာတာရှည်ရောဂါများအတွက် အထွေထွေရောဂါကုသမှုများ</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                            alt="Health Checkup">
+                    </div>
+                    <div class="service-content">
+                        <h3>ကျန်းမာရေးစစ်ဆေးခြင်း</h3>
+                        <p>နှစ်စဉ်ကျန်းမာရေးစစ်ဆေးမှုများ၊ လုပ်ငန်းခွင်ကျန်းမာရေးစစ်ဆေးမှုများ</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1542868727-6ebd18386391?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                            alt="Vaccination">
+                    </div>
+                    <div class="service-content">
+                        <h3>ကာကွယ်ဆေးထိုးခြင်း</h3>
+                        <p>ကလေးများနှင့် လူကြီးများအတွက် ကာကွယ်ဆေးထိုးနှံခြင်းဝန်ဆောင်မှုများ</p>
+                    </div>
+                </div>
             </div>
-            <div class="detail-row">
-                <span class="detail-label">Invoice No:</span>
-                <span class="detail-value">GST112025</span>
+        </div>
+    </section>
+
+    <!-- Doctor Section -->
+    <section class="doctor" id="doctor">
+        <h2 class="section-title">ကုသပေးမည့် ဆရာဝန်အကြောင်း</h2>
+        <div class="doctor-profile">
+            <div class="doctor-img">
+                <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                    alt="Dr. May Zon Ei San">
             </div>
-            <div class="detail-row">
-                <span class="detail-label">Challan No:</span>
-                <span class="detail-value">865</span>
+            <div class="doctor-info">
+                <h3>ဒေါက်တာ May Zon Ei San</h3>
+                <p>M.B.,B.S (MDY)</p>
+                <p>အေးချမ်းမွန် အထွေထွေရောဂါကု ဆေးခန်း၏ တည်ထောင်သူနှင့် အဓိကဆရာဝန်ဖြစ်ပါသည်။ 
+                    မန္တလေးဆေးတက္ကသိုလ်မှ ဘွဲ့ရရှိပြီး အထွေထွေရောဂါကုသရေးနယ်ပယ်တွင် နှစ်ပေါင်း ၁၅ နှစ်ကျော်
+                    အတွေ့အကြုံရှိပါသည်။</p>
+                <div class="qualification">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>M.B.,B.S (MDY) - မန္တလေးဆေးတက္ကသိုလ်</span>
+                </div>
+                <div class="qualification">
+                    <i class="fas fa-certificate"></i>
+                    <span>အထွေထွေရောဂါကုဆရာဝန် (အထူးကျွမ်းကျင်သူ)</span>
+                </div>
+                <div class="qualification">
+                    <i class="fas fa-award"></i>
+                    <span>မြန်မာနိုင်ငံဆရာဝန်အသင်း အသိအမှတ်ပြုလက်မှတ်</span>
+                </div>
             </div>
-            <div class="detail-row">
-                <span class="detail-label">P.O. No:</span>
-                <span class="detail-value">66</span>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>ဆက်သွယ်ရန်</h3>
+                <p>အေးချမ်းမွန် အထွေထွေရောဂါကု ဆေးခန်းသို့ လာရောက်ပြသလိုပါက အောက်ပါဆက်သွယ်ရန်နည်းလမ်းများမှ တစ်ဆင့်
+                    ဆက်သွယ်နိုင်ပါသည်။</p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <a href="https://maps.app.goo.gl/XH1jBA39shHCWHLGA" target="_blank" style="color: inherit; text-decoration: none;">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </a>                        
+                        <div class="contact-text">
+                            <a href="https://maps.app.goo.gl/HznnTBjrWgp7nxUK6" target="_blank" style="color: inherit; text-decoration: none;">
+                                <h4>လိပ်စာ</h4>
+                            </a>    
+                            <p>                               
+                                <a href="https://maps.app.goo.gl/HznnTBjrWgp7nxUK6" target="_blank"
+                                    style="color: inherit; text-decoration: none;">
+                                    ၁၀၆လမ်း၊ ၅၃လမ်း x ၅၄ လမ်းကြား၊ ချမ်းမြသာစည်မြို့နယ်၊ မန္တလေးမြို့                                    
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone-volume"></i>
+                        <div class="contact-text" onclick="window.location.href='tel:09779949903'">
+                            <h4>ဖုန်းနံပါတ်</h4>
+                            <p>09779949903</p>                  
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div class="contact-text">
+                            <h4>ဖွင့်လှစ်ချိန်</h4>
+                            <p>တနင်္လာမှ စနေနေ့ - နံနက် ၉:၀၀ မှ ညနေ ၅:၀၀ အထိ</p>
+                            <p>တနင်္ဂနွေ - နံနက် ၉:၀၀ မှ မွန်းလွဲ ၁:၀၀ အထိ</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="detail-row">
-                <span class="detail-label">Other Charges:</span>
-                <span class="detail-value">No</span>
+           
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>အေးချမ်းမွန်</h3>
+                <p>အထွေထွေရောဂါကု ဆေးခန်း</p>
+                <p>သင့်ကျန်းမာရေး ကျွန်ုပ်တို့၏ ဦးစားပေး</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
             </div>
-            <div class="detail-row">
-                <span class="detail-label">Due Date:</span>
-                <span class="detail-value">Contact Customer Service</span>
+            <div class="footer-col">
+                <h3>ဆက်သွယ်ရန်</h3>
+                <p><i class="fas fa-map-marker-alt"></i> ၁၀၆လမ်း၊ ၅၃လမ်း x ၅၄ လမ်းကြား၊ ချမ်းမြသာစည်မြို့နယ်၊
+                    မန္တလေးမြို့</p>
+                <p><i class="fas fa-phone-volume"></i> <a href="tel:09779949903"
+                        style="color: inherit; text-decoration: none;">09779949903</a></p>
+                <p><i class="fas fa-envelope"></i> info@ayemyarmon.com</p>
             </div>
         </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <div>
-        <div class="section-title" id="blue">1. Reason</div>
-        <div id="reason-text">In accordance with applicable government regulations, customers conducting large withdrawals of <span class="amount-value">₹11,84,000</span> may be subject to national tax obligations of <span class="highlight-percentage">20%</span> (<span class="amount-value">₹2,36,800</span>)</div>
-    </div>
-
-    <br>
-
-    <div>
-        <div class="section-title" id="blue">2. How to solve</div>
-        <div id="how-to-solve-text">Please be advised that a deposit of <span id="deposit-amount" class="highlight">₹2,36,800</span> is required to initiate the process. The procedure is expected to take approximately 30 to 60 minutes. Upon successful completion, the full amount will be available for withdrawal to the customer's specified personal account.</div>
-    </div>
-
-    <br>
-
-    <div>
-        <div class="section-title" id="blue">3. Note</div>
-        <div id="note-text">Prior to the withdrawal of <span class="amount-value">₹11,84,000</span> (Eleven Lakh Eighty Four Thousand Rupees Only), please note that, in accordance with national tax regulations, a tax payment of <span class="highlight-percentage">20%</span>—amounting to <span class="amount-value">₹2,36,800</span>—is required. Upon successful payment of the applicable tax, the total amount of <span class="amount-value">₹14,20,800</span> will be credited to your designated account in a single transaction</div>
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="amount-section">
-        <div>Total in words: <strong id="amount-in-words" class="amount-value">Two Lakh Thirty Six Thousand Eight Hundred Rupees Only</strong></div>
-    </div>
-
-    <div class="divider"></div>
-
-    <div>
-        <div>Taxable Amount: <span id="taxable-amount" class="amount-value">2,36,800</span> INR</div>
-        <div>Total Tax: <span id="total-tax" class="amount-value">2,36,800</span> INR</div>
-        <div>GST Payable After Tax: N.A.</div>
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="certification">        
-        <div><strong>Certified that particulars given above are true and correct</strong></div>
-    </div>
-    
-
-    <div class="footer">
-        <div>This is computer generated invoice and no signature is required</div>
-    </div>
-</div>
-    <div class="form-section">
-        <h2>Enter Customer Details</h2>
-        <div class="form-group">
-            <label for="customer-name">Name:</label>
-            <input type="text" id="customer-name" value="Mr. Subham Sen">
+        <div class="copyright">
+            <p>© 2025 အေးချမ်းမွန် အထွေထွေရောဂါကု ဆေးခန်း. All rights reserved.</p>
         </div>
-        <div class="form-group">
-            <label for="acc-number">Account Number:</label>
-            <input type="text" id="acc-number" value="6645661545">
-        </div>
-        <div class="form-group">
-            <label for="ifsc-code">IFSC Code:</label>
-            <input type="text" id="ifsc-code" value="KKBK0006577">
-        </div>
-        <div class="form-group">
-            <label for="bank-name">Bank Name:</label>
-            <input type="text" id="bank-name" value="Kotak Mahindra Bank">
-        </div>
-        <div class="form-group">
-            <label for="email">Email Address:</label>
-            <input type="email" id="email" value="2008.subham@gmail.com">
-        </div>
-        
-        <h2>Enter Amount Details</h2>
-        <div class="form-group">
-            <label for="withdrawal-amount">Withdrawal Amount (₹):</label>
-            <input type="number" id="withdrawal-amount" value="1000000">
-        </div>
-        
-        <div class="form-group">
-            <label for="tax-percentage">Tax Percentage:</label>
-            <input type="number" id="tax-percentage" class="percentage-input" value="20" min="0" max="100">%
-        </div>
-        
-        <button onclick="updateInvoice()">Generate Invoice</button>
-    </div>
+    </footer>
 
     <script>
-        // Set current date
-        function formatDate(date) {
-            const months = ["January", "February", "March", "April", "May", "June", 
-                          "July", "August", "September", "October", "November", "December"];
-            return date.getDate() + ' ' + months[date.getMonth()] + ', ' + date.getFullYear();
-        }
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
 
-        // Number to words conversion for Indian numbering system
-        function numberToWords(num) {
-            const single = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
-            const double = ["Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", 
-                          "Seventeen", "Eighteen", "Nineteen"];
-            const tens = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
-            
-            function convertLessThanOneHundred(n) {
-                if (n < 10) return single[n];
-                if (n < 20) return double[n - 10];
-                return tens[Math.floor(n / 10)] + (n % 10 ? " " + single[n % 10] : "");
-            }
-            
-            function convertLessThanOneThousand(n) {
-                const hundred = Math.floor(n / 100);
-                const remainder = n % 100;
-                let res = "";
-                if (hundred > 0) {
-                    res = single[hundred] + " Hundred";
-                }
-                if (remainder > 0) {
-                    res += (res ? " " : "") + convertLessThanOneHundred(remainder);
-                }
-                return res;
-            }
-            
-            if (num === 0) return "Zero Rupees Only";
-            
-            const crore = Math.floor(num / 10000000);
-            const lakh = Math.floor((num % 10000000) / 100000);
-            const thousand = Math.floor((num % 100000) / 1000);
-            const hundred = num % 1000;
-            
-            let result = "";
-            
-            if (crore > 0) {
-                result += convertLessThanOneThousand(crore) + " Crore";
-            }
-            if (lakh > 0) {
-                result += (result ? " " : "") + convertLessThanOneThousand(lakh) + " Lakh";
-            }
-            if (thousand > 0) {
-                result += (result ? " " : "") + convertLessThanOneThousand(thousand) + " Thousand";
-            }
-            if (hundred > 0) {
-                result += (result ? " " : "") + convertLessThanOneThousand(hundred);
-            }
-            
-            return result + " Rupees Only";
-        }
+        mobileMenu.addEventListener('click', function () {
+            navLinks.classList.toggle('active');
 
-        // Format Indian currency
-        function formatINR(amount) {
-            return '₹' + amount.toLocaleString('en-IN');
-        }
+            // Change icon between bars and times
+            const icon = this.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
 
-        // Update invoice with form data
-        function updateInvoice() {
-            // Customer details
-            const name = document.getElementById('customer-name').value;
-            const accNumber = document.getElementById('acc-number').value;
-            const ifsc = document.getElementById('ifsc-code').value;
-            const bank = document.getElementById('bank-name').value;
-            const email = document.getElementById('email').value;
-            
-            document.getElementById('display-customer-name').textContent = name;
-            document.getElementById('display-acc-number').textContent = accNumber;
-            document.getElementById('display-ifsc').textContent = ifsc;
-            document.getElementById('display-bank').textContent = bank;
-            document.getElementById('display-email').textContent = email;
-            
-            // Amount calculations
-            const withdrawalAmount = parseInt(document.getElementById('withdrawal-amount').value) || 0;
-            const taxPercentage = parseInt(document.getElementById('tax-percentage').value) || 0;
-            const taxAmount = Math.floor(withdrawalAmount * (taxPercentage / 100));
-            const depositAmount = taxAmount;
-            const totalAmount = withdrawalAmount + taxAmount;
-            
-            // Update sections
-            document.getElementById('reason-text').innerHTML = 
-                `In accordance with applicable government regulations, customers conducting large withdrawals of <span class="amount-value">${formatINR(withdrawalAmount)}</span> may be subject to national tax obligations of <span class="highlight-percentage">${taxPercentage}%</span> (<span class="amount-value">${formatINR(taxAmount)}</span>)`;
-            
-            document.getElementById('how-to-solve-text').innerHTML = 
-                `Please be advised that a deposit of <span class="highlight">${formatINR(depositAmount)}</span> is required to initiate the process. The procedure is expected to take approximately 30 to 60 minutes. Upon successful completion, the full amount will be available for withdrawal to the customer's specified personal account.`;
-            
-            document.getElementById('note-text').innerHTML = 
-                `Prior to the withdrawal of <span class="amount-value">${formatINR(withdrawalAmount)}</span> (${numberToWords(withdrawalAmount)}), please note that, in accordance with national tax regulations, a tax payment of <span class="highlight-percentage">${taxPercentage}%</span>—amounting to <span class="amount-value">${formatINR(taxAmount)}</span>—is required. Upon successful payment of the applicable tax, the total amount of <span class="amount-value">${formatINR(totalAmount)}</span> will be credited to your designated account in a single transaction`;
-            
-            // Update amount sections
-            document.getElementById('amount-in-words').textContent = numberToWords(depositAmount);
-            document.getElementById('taxable-amount').textContent = formatINR(depositAmount).replace('₹', '');
-            document.getElementById('total-tax').textContent = formatINR(taxAmount).replace('₹', '');
-            document.getElementById('deposit-amount').textContent = formatINR(depositAmount);
-        }
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function () {
+                navLinks.classList.remove('active');
+                mobileMenu.querySelector('i').classList.remove('fa-times');
+                mobileMenu.querySelector('i').classList.add('fa-bars');
+            });
+        });
 
-        // Initialize with default values
-        window.onload = function() {
-            document.getElementById('invoice-date').textContent = formatDate(new Date());
-            updateInvoice();
-        };
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
 
-        // Improved screenshot functions
-        async function captureMain() {
-            try {
-                // Check if clipboard-write permission is granted
-                const permissionStatus = await navigator.permissions.query({
-                    name: 'clipboard-write'
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
                 });
-                
-                if (permissionStatus.state === 'granted' || permissionStatus.state === 'prompt') {
-                    const element = document.querySelector('.container');
-                    await captureElement(element, ' ');
-                } else {
-                    showToast('❌ Clipboard permission not granted');
-                }
-            } catch (err) {
-                console.error('Permission check failed:', err);
-                // Fallback to trying anyway
-                const element = document.querySelector('.container');
-                await captureElement(element, ' ');
-            }
-        }
+            });
+        });
 
-        // Generic capture function with improved error handling
-        async function captureElement(element, sectionName = '') {
-            if (!element) {
-                alert('Element not found for screenshot');
-                return;
-            }
-
-            const originalBoxShadow = element.style.boxShadow;
-            element.style.boxShadow = 'none';
-
-            try {
-                const canvas = await html2canvas(element, {
-                    backgroundColor: "#24282e", // Match your container's background
-                    scale: 1, // Start with 1 for better compatibility
-                    logging: true, // Enable to see console logs
-                    useCORS: true,
-                    allowTaint: true,
-                    scrollX: 0,
-                    scrollY: 0,
-                    windowWidth: element.scrollWidth,
-                    windowHeight: element.scrollHeight
-                });
-
-                // Convert canvas to blob
-                canvas.toBlob(async (blob) => {
-                    try {
-                        await navigator.clipboard.write([
-                            new ClipboardItem({ 'image/png': blob })
-                        ]);
-                        showToast(`📋 ${sectionName} Screenshot copied to clipboard!`);
-                    } catch (err) {
-                        console.error('Clipboard write failed:', err);
-                        // Fallback to saving as image file
-                        saveAsImage(canvas, sectionName);
-                    }
-                }, 'image/png');
-            } catch (err) {
-                console.error('Screenshot failed:', err);
-                showToast(`❌ Failed to capture ${sectionName}: ${err.message}`);
-            } finally {
-                element.style.boxShadow = originalBoxShadow;
-            }
-        }
-
-        // Fallback function to save as image file
-        function saveAsImage(canvas, name) {
-            const link = document.createElement('a');
-            link.download = `${name || 'screenshot'}-${new Date().toISOString()}.png`;
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-            showToast(`📋 ${name} screenshot saved as file (clipboard not available)`);
-        }
-
-        // Toast notification function
-        function showToast(message) {
-            const toast = document.getElementById('notification');
-            toast.textContent = message;
-            toast.style.display = 'block';
-            
-            setTimeout(() => {
-                toast.style.display = 'none';
-            }, 3000);
-        }   
+        document.getElementById('phoneDiv').addEventListener('click', function () {
+                window.location.href = 'tel:09779949903';
+        });
     </script>
 </body>
+
 </html>
